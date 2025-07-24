@@ -5,11 +5,11 @@ import os
 app = Flask(__name__)
 
 # Reemplazá esta línea con tu API key personal (nunca la compartas públicamente)
-openai.api_key = ""
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-@app.route("/chat", methods=["POST"])
-def chat():
+@app.route("/preguntar", methods=["POST"])
+def preguntar():
     data = request.get_json()
     mensaje = data.get("mensaje", "")
 
