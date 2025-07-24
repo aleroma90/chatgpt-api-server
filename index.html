@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi tutor virtual</title>
+</head>
+<body>
+  <h2>Chat con ChatGPT (conectado a Replit)</h2>
+  <form id="form">
+    <input type="text" id="input" placeholder="Escribí tu pregunta..." style="width: 300px;" />
+    <button type="submit">Enviar</button>
+  </form>
+  <div id="respuesta" style="margin-top: 20px; font-weight: bold;"></div>
+
+  <script>
+    document.getElementById("form").addEventListener("submit", async e => {
+      e.preventDefault();
+      const mensaje = document.getElementById("input").value;
+
+      const res = await fetch("https://chatgpt-api-server.aleroma90.repl.co/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mensaje })
+      });
+
+      const data = await res.json();
+      document.getElementById("respuesta").innerText = data.respuesta;
+    });
+  </script>
+</body>
+</html>
